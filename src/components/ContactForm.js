@@ -1,5 +1,6 @@
-import {Formik, Form, Field} from "formik"
+import {Formik} from "formik"
 import * as Yup from 'yup';
+import { ContactsForm, ContactsField } from "./ContactForm.styled";
 
 const contactSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
@@ -19,18 +20,18 @@ export const ContactForm = ({onAdd}) => {
             onAdd(values);
             actions.resetForm();
         }}>
-            <Form>
+            <ContactsForm>
                 <label>
                     Name
-                    <Field type="text" name="name" required />
+                    <ContactsField type="text" name="name" required />
                 </label>
                 <label>
                     Number
-                    <Field type="tel" name="number" required />
+                    <ContactsField type="tel" name="number" required />
                 </label>
 
                 <button type="submit">Add contact</button>
-            </Form>
+            </ContactsForm>
         </Formik>
     )
 }
