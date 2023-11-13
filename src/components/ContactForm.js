@@ -1,11 +1,11 @@
 import {Formik} from "formik"
 import * as Yup from 'yup';
-import { ContactsForm, ContactsField } from "./ContactForm.styled";
+import { ContactsForm, ContactsField, FormButton, FormError } from "./ContactForm.styled";
 
 const contactSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     number: Yup.string()
-    .matches(/^\d{3}-\d{2}-\d{2}$/g, 'Invalid phone number')
+    .matches(/^\d{3}-\d{2}-\d{2}$/g, 'Number format: xxx-xx-xx')
     .required('Required')
 })
 
@@ -23,14 +23,15 @@ export const ContactForm = ({onAdd}) => {
             <ContactsForm>
                 <label>
                     Name
-                    <ContactsField type="text" name="name" required />
+                    <ContactsField type="text" name="name" required /><br/>
                 </label>
                 <label>
                     Number
-                    <ContactsField type="tel" name="number" required />
+                    <ContactsField type="tel" name="number" placeholder="xxx-xx-xx" required /><br/>
+                    <FormError name="number" component="span"/>
                 </label>
 
-                <button type="submit">Add contact</button>
+                <FormButton type="submit">Add contact</FormButton>
             </ContactsForm>
         </Formik>
     )
